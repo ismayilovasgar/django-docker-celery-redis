@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+
+    web:
+      container_name: django
+      build:
+        context: ./core
+      command: uvicorn core.asgi:application --port 8000 --workers 4 --log-level debug --reload
+      volumes:
+        - ./core:/usr/src/app/
+      ports:
+        - 80:80
+      env_file:
+        - ./env_vars_django.txt
+      depends_on:
+        - redis
+      
