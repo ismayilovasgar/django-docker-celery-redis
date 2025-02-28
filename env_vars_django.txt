@@ -1,5 +1,8 @@
 
-
 DEBUG=1
 SECRET_KEY =django-insecure-=y#vt@dri8vkiliuqfk#i+24(epl@c44cyvreh2y=u0*d9#aal
 ALLOWED_HOSTS =localhost,127.0.0.1
+
+
+CELERY_BROKER=amqp://guest:guest@rabbitmq:5672/
+CELERY_BACKEND=redis://redis:6379/0
