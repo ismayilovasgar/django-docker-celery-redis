@@ -5,7 +5,7 @@ services:
     container_name: django
     build:
       context: ./core
-    command: uvicorn core.asgi:application --port 8000 --workers 4 --log-level debug --reload
+    command: uvicorn core.asgi:application --host 0.0.0.0 --port 8000 --workers 4 --log-level debug --reload
     volumes:
       - ./core:/usr/src/app/
     ports:
@@ -34,6 +34,18 @@ services:
       - 5555:5555
     environment:
       - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
+
+  celery:
+    container_name: celery
+    build:
+      context: ./core
+    command: celery --app=core worker -l INFO -B
+    volumes:
+      - ./core:/usr/src/app/
+    env_file:
+      - ./env_vars_django.txt
+    # depends_on:
+    #   - redis
 
   
 
