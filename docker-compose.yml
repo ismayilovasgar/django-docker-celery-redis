@@ -9,7 +9,7 @@ services:
     volumes:
       - ./core:/usr/src/app/
     ports:
-      - 80:80
+      - 8000:8000 
     env_file:
       - ./env_vars_django.txt
     # depends_on:
@@ -25,7 +25,7 @@ services:
   redis:
     image: redis:7.0.11-alpine
     ports:
-      - 6379:6379 # Expose Redis port to the host machine
+      - "6379:6379" # Expose Redis port to the host machine
 
   flower:
     image: mher/flower
